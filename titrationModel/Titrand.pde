@@ -5,6 +5,7 @@ class Titrand extends Solution{
   }
   
   public boolean isEquivalent(){
+    if((isAcid && isStrong) ) // add condiction for if the base is also strong
      if (pH == 7.0){
        return true;
      }
