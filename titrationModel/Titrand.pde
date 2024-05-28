@@ -4,12 +4,14 @@ class Titrand extends Solution{
     super(isStrong, isAcid, name, pH, concentration);
   }
   
-  public boolean isEquivalent(){
-    if((isAcid && isStrong) ) // add condiction for if the base is also strong
-     if (pH == 7.0){
-       return true;
-     }
-    return false;
+  public boolean isEquivalent(Titrant titrant) {
+    if (this.concentration == titrant.concentration) {
+      if (this.isStrong && titrant.isStrong) {
+          return (this.isAcid && !titrant.isAcid) || (!this.isAcid && titrant.isAcid);
+          // checks if one is acid and one is base
+      }
+    }
+     return false;
   }
   
   
