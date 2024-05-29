@@ -17,6 +17,10 @@ class Titrand extends Solution{
      return false;
   }
   
-  
+  void atEquivalence(){
+    fill(255,182,193);
+    noStroke();
+    rect(315, 640, 103, 100, 12, 12, 48, 72);
+  }
 
 }
