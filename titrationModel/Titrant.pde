@@ -7,8 +7,10 @@ class Titrant extends Solution{
     this.isAcid=isAcid;
   }
   
-  public float drip(){
-    return 0.0;
+  void drip(float dropY){
+    fill(173,216,230);
+    noStroke();
+    ellipse(365, dropY, 20, 20);
   }
   
   
