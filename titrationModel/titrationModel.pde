@@ -2,6 +2,7 @@ PImage origBeaker;
 PImage buret;
 boolean newSetup;
 Titrant titrant;
+Titrand titrand;
 float dropY;
 boolean startDropping;
 Table table;
@@ -28,9 +29,8 @@ void mouseClicked() {
 
 void setup2(){
   background(255);
-  origBeaker = loadImage("original.jpg");
-  buret = loadImage("buret.png");
   titrant = new Titrant(true, true, "Titrant", 1.0, 1.0); // change this later
+<<<<<<< HEAD
   
   table = new Table();
   table.addColumn("titrand");
@@ -41,12 +41,18 @@ void setup2(){
   newRow.setString("titrand", "change");
   newRow.setString("titrant","later");
   newRow.setFloat("pH", titrant.getpH());
+
+  titrand = new Titrand(true, false, "Titrand", 10.0, 1.0);
+  origBeaker = loadImage("original.png");
+  buret = loadImage("buret.png");
+  
 }
 
 void draw(){
   //background(255);
   
   if (origBeaker != null) {
+    titrand.atEquivalence();
     image(origBeaker, 240, 565, width/4, height/4);
   }
   
