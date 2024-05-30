@@ -22,4 +22,8 @@ class Solution{
   public float getConcentration() {
     return concentration;
   }
+  
+  public float calcpH(){
+    return 0.0;}
+  
 }

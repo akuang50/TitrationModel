@@ -5,13 +5,19 @@ Titrant titrant;
 Titrand titrand;
 float dropY;
 boolean startDropping;
+Table table;
 
 void setup(){
   size(1000, 800);
-  background(255);
+  background(152,190,100);
   newSetup = true;
   dropY = 595;
   startDropping = false;
+  rect(375, 350, 220, 100, 28);
+  
+  textSize(75);
+  fill(0);
+  text("START", 380, 415); 
 }
 
 void mouseClicked() {
@@ -24,6 +30,18 @@ void mouseClicked() {
 void setup2(){
   background(255);
   titrant = new Titrant(true, true, "Titrant", 1.0, 1.0); // change this later
+<<<<<<< HEAD
+  
+  table = new Table();
+  table.addColumn("titrand");
+  table.addColumn("titrant");
+  table.addColumn("indicator");
+  table.addColumn("pH");
+  TableRow newRow = table.addRow();
+  newRow.setString("titrand", "change");
+  newRow.setString("titrant","later");
+  newRow.setFloat("pH", titrant.getpH());
+
   titrand = new Titrand(true, false, "Titrand", 10.0, 1.0);
   origBeaker = loadImage("original.png");
   buret = loadImage("buret.png");
@@ -31,7 +49,7 @@ void setup2(){
 }
 
 void draw(){
-  background(255);
+  //background(255);
   
   if (origBeaker != null) {
     titrand.atEquivalence();
@@ -57,4 +75,5 @@ void draw(){
       }
     }
   }
+  //titrant.calcpH();
 }
