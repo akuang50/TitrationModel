@@ -2,9 +2,11 @@ PImage origBeaker;
 PImage buret;
 boolean newSetup;
 Titrant titrant;
+Titrand titrand;
 float dropY;
 boolean startDropping;
 Table table;
+boolean setup2;
 
 void setup(){
   size(1000, 800);
@@ -28,9 +30,11 @@ void mouseClicked() {
 
 void setup2(){
   background(255);
-  origBeaker = loadImage("original.jpg");
-  buret = loadImage("buret.png");
+  setup2 = true;
   titrant = new Titrant(true, true, "Titrant", 1.0, 1.0); // change this later
+  titrand = new Titrand(true, false, "Titrand", 10.0, 1.0);
+  origBeaker = loadImage("original.png");
+  buret = loadImage("buret.png");
   
   table = new Table();
   table.addColumn("titrand");
@@ -40,13 +44,25 @@ void setup2(){
   TableRow newRow = table.addRow();
   newRow.setString("titrand", "change");
   newRow.setString("titrant","later");
+<<<<<<< HEAD
+  newRow.setFloat("pH", 7.0);
+  saveTable(table, "table.csv");
+  tabled("table.csv", table);
+=======
   newRow.setFloat("pH", titrant.getpH());
+
+  
+  
+>>>>>>> 3e7c04c88aa9d003c38041fd73372a45becf1cdd
 }
 
 void draw(){
-  //background(255);
+  if(setup2){
+    background(255);
+  }
   
   if (origBeaker != null) {
+    titrand.atEquivalence();
     image(origBeaker, 240, 565, width/4, height/4);
   }
   
@@ -55,14 +71,15 @@ void draw(){
   }
   
   if (titrant != null) {
+    
     if (keyPressed && key == ENTER) {
       startDropping = true;
     }
-    
+
     if (startDropping) {
       if (dropY < 650) {
         dropY += 5;
-        titrant.drip(dropY);  
+        titrant.drip(dropY); 
       } else {
         startDropping = false;
         dropY = 595;  // Reset drop position for next time
@@ -70,4 +87,10 @@ void draw(){
     }
   }
   //titrant.calcpH();
+}
+void tabled(String name, Table table) {
+  for (int i = 0; i<table.getColumnCount(); i++) {
+    textSize(10);
+    //text(table.getString(0,i), 25+i*20, 25);
+  } 
 }
