@@ -30,7 +30,9 @@ void mouseClicked() {
 void setup2(){
   background(255);
   titrant = new Titrant(true, true, "Titrant", 1.0, 1.0); // change this later
-<<<<<<< HEAD
+  titrand = new Titrand(true, false, "Titrand", 10.0, 1.0);
+  origBeaker = loadImage("original.png");
+  buret = loadImage("buret.png");
   
   table = new Table();
   table.addColumn("titrand");
@@ -40,12 +42,9 @@ void setup2(){
   TableRow newRow = table.addRow();
   newRow.setString("titrand", "change");
   newRow.setString("titrant","later");
-  newRow.setFloat("pH", titrant.getpH());
-
-  titrand = new Titrand(true, false, "Titrand", 10.0, 1.0);
-  origBeaker = loadImage("original.png");
-  buret = loadImage("buret.png");
-  
+  newRow.setFloat("pH", 7.0);
+  saveTable(table, "table.csv");
+  tabled("table.csv", table);
 }
 
 void draw(){
@@ -76,4 +75,10 @@ void draw(){
     }
   }
   //titrant.calcpH();
+}
+void tabled(String name, Table table) {
+  for (int i = 0; i<table.getColumnCount(); i++) {
+    textSize(10);
+    //text(table.getString(0,i), 25+i*20, 25);
+  } 
 }

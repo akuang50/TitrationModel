@@ -8,9 +8,13 @@ class Titrant extends Solution{
   }
   
   void drip(float dropY){
+    
+    
     fill(173,216,230);
     noStroke();
     ellipse(365, dropY, 20, 20);
+    
+    
   }
   
   
