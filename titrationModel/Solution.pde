@@ -15,15 +15,15 @@ class Solution{
     return name;
   }
   
-  public float getpH(){
-    return pH;
-  }
-  
   public float getConcentration() {
     return concentration;
   }
   
-  public float calcpH(){
-    return 0.0;}
+  public float getpH(){
+   pH = -log(getConcentration());
+   return pH;
+  }
+  
+
   
 }
