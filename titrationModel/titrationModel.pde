@@ -1,12 +1,9 @@
-PImage origBeaker;
-PImage buret;
-boolean newSetup;
+PImage origBeaker, buret;
+boolean newSetup, setup2, startDropping;
 Titrant titrant;
 Titrand titrand;
 float dropY;
-boolean startDropping;
 Table table;
-boolean setup2;
 
 void setup(){
   size(1000, 800);
@@ -31,8 +28,8 @@ void mouseClicked() {
 void setup2(){
   background(255);
   setup2 = true;
-  titrant = new Titrant(true, true, "Titrant", 1.0, 1.0); // change this later
-  titrand = new Titrand(true, false, "Titrand", 10.0, 1.0);
+  titrant = new Titrant(true, true, "Titrant", 1.0, 1.0,100.0); // change this later
+  titrand = new Titrand(true, false, "Titrand", 10.0, 1.0,0);
   origBeaker = loadImage("original.png");
   buret = loadImage("buret.png");
   
@@ -80,6 +77,8 @@ void draw(){
       if (dropY < 650) {
         dropY += 5;
         titrant.drip(dropY); 
+        titrand.addTitrantVolume(0.5);
+        titrand.checkEquivalence(titrant);
       } else {
         startDropping = false;
         dropY = 595;  // Reset drop position for next time
