@@ -1,14 +1,17 @@
 class Solution{
   
   String name;
-  float pH;
-  float concentration;
+  float pH, concentration,volume;
+  boolean isStrong, isAcid;
   
-  public Solution(String name, float pH, float concentration) {
+  public Solution(boolean isStrong, boolean isAcid,String name, float pH, float concentration, float volume) {
     
     this.name=name;
     this.pH=pH;
     this.concentration=concentration;
+    this.isStrong = isStrong;
+    this.isAcid = isAcid;
+    this.volume = volume;
   }
   
   public String getName() {
@@ -23,7 +26,13 @@ class Solution{
    pH = -log(getConcentration());
    return pH;
   }
-  
+ 
+ public float getVolume(){
+   return volume;
+ }
+  public float calcMoles(){
+   return volume * concentration;
+  }
 
   
 }

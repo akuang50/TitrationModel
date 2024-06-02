@@ -1,10 +1,8 @@
 class Titrant extends Solution{
-  boolean isStrong;
-  boolean isAcid;
-  public Titrant(boolean isStrong, boolean isAcid, String name, float pH, float concentration){
-    super( name, pH, concentration);
-    this.isStrong=isStrong;
-    this.isAcid=isAcid;
+
+  public Titrant(boolean isStrong, boolean isAcid, String name, float pH, float concentration,float volume){
+    super( isStrong, isAcid,name, pH, concentration,volume);
+
   }
   
   void drip(float dropY){
