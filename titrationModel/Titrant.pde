@@ -17,6 +17,12 @@ class Titrant extends Solution{
     
   }
   
+  void chooseTitrant() {
+    fill(173,216,230);
+    noStroke();
+    rect(365,100,20,100);
+  }
+  
   
 
 }

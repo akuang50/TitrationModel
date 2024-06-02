@@ -44,21 +44,21 @@ void setup2(){
   TableRow newRow = table.addRow();
   newRow.setString("titrand", "change");
   newRow.setString("titrant","later");
-<<<<<<< HEAD
+  newRow.setString("indicator", "yeah");
   newRow.setFloat("pH", 7.0);
   saveTable(table, "table.csv");
-  tabled("table.csv", table);
-=======
-  newRow.setFloat("pH", titrant.getpH());
+  
+
+  //newRow.setFloat("pH", titrant.getpH());
 
   
   
->>>>>>> 3e7c04c88aa9d003c38041fd73372a45becf1cdd
 }
 
 void draw(){
   if(setup2){
     background(255);
+    titrant.chooseTitrant();
   }
   
   if (origBeaker != null) {
@@ -86,11 +86,12 @@ void draw(){
       }
     }
   }
+  //tabled("table.csv", table);
   //titrant.calcpH();
 }
 void tabled(String name, Table table) {
   for (int i = 0; i<table.getColumnCount(); i++) {
     textSize(10);
-    //text(table.getString(0,i), 25+i*20, 25);
+    text(table.getString(0,i), 25+i*20, 25);
   } 
 }
