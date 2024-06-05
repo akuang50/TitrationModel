@@ -56,6 +56,7 @@ void draw(){
   if(setup2){
     background(255);
     titrant.chooseTitrant();
+    tabled();
   }
   
   if (origBeaker != null) {
@@ -65,6 +66,8 @@ void draw(){
   
   if (buret != null) {
     image(buret, 100, 100);
+    
+
   }
   
   if (titrant != null) {
@@ -85,12 +88,18 @@ void draw(){
       }
     }
   }
-  //tabled("table.csv", table);
   //titrant.calcpH();
 }
-void tabled(String name, Table table) {
-  for (int i = 0; i<table.getColumnCount(); i++) {
+void tabled() {
+  String[] lis = {"titrand", "titrant", "indicator", "pH", "concentration", "volume"};
+  fill(0);
+  for (int i = 0; i<6; i++) {
     textSize(10);
-    text(table.getString(0,i), 25+i*20, 25);
+    text(lis[i], 25+i*50, 25);
+  } 
+  String[] lis2 = {titrand.getName(), titrant.getName(), titrand.getName(), ""+titrand.getpH(), ""+titrand.getConcentration(), ""+titrand.getVolume()};
+  for (int i = 0; i<6; i++) {
+    textSize(10);
+    text(lis2[i], 25+i*50, 50);
   } 
 }
