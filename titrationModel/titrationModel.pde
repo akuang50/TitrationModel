@@ -1,9 +1,11 @@
-PImage origBeaker, buret;
+PImage origBeaker, buret, case1;
 boolean newSetup, setup2, startDropping;
 Titrant titrant;
 Titrand titrand;
+Indicator indicator;
 float dropY;
 Table table;
+int mode;
 
 void setup(){
   size(1000, 800);
@@ -16,13 +18,17 @@ void setup(){
   textSize(75);
   fill(0);
   text("START", 380, 415); 
+  mode = 0;
+  case1 = loadImage("strongacidstrongbase.jpeg");
 }
 
 void mouseClicked() {
-  if (newSetup){
+  if (mode==0) {mode++;}
+  if (mode==1) {if(mouseX>0&&mouseX<75&&mouseY>0&&mouseY<75) {mode++;}}
+  /*if (newSetup){
     setup2();
     newSetup = false;
-  }
+  }*/
 }
 
 void setup2(){
@@ -30,8 +36,10 @@ void setup2(){
   setup2 = true;
   titrant = new Titrant(true, true, "Titrant", 1.0, 1.0,100.0); // change this later
   titrand = new Titrand(true, false, "Titrand", 10.0, 1.0,0);
+  indicator = new Indicator(true, false, "Indicator", 0,0,0);
   origBeaker = loadImage("original.png");
   buret = loadImage("buret.png");
+  
   
   table = new Table();
   table.addColumn("titrand");
@@ -53,6 +61,20 @@ void setup2(){
 }
 
 void draw(){
+  switch(mode) {
+    case 0: 
+    
+      break;
+    case 1:
+      background(255);
+      image(case1, 0, 0, width/3, height/3);
+      
+      break;
+    case 2:
+      setup2();
+      break;
+     
+  }
   if(setup2){
     background(255);
     titrant.chooseTitrant();
@@ -80,9 +102,9 @@ void draw(){
       if (dropY < 650) {
         dropY += 5;
         titrant.drip(dropY); 
-        titrand.addTitrantVolume(0.5);
         titrand.checkEquivalence(titrant);
       } else {
+        titrand.addTitrantVolume(5);
         startDropping = false;
         dropY = 595;  // Reset drop position for next time
       }
