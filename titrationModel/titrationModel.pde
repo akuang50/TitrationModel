@@ -80,9 +80,9 @@ void draw(){
       if (dropY < 650) {
         dropY += 5;
         titrant.drip(dropY); 
-        titrand.addTitrantVolume(0.5);
         titrand.checkEquivalence(titrant);
       } else {
+        titrand.addTitrantVolume(5);
         startDropping = false;
         dropY = 595;  // Reset drop position for next time
       }
@@ -91,15 +91,15 @@ void draw(){
   //titrant.calcpH();
 }
 void tabled() {
-  String[] lis = {"titrand", "titrant", "indicator", "pH", "concentration", "volume"};
+  String[] lis = {"titrand", "titrant", "indicator", "pH", "concentration", "volume(ml)"};
   fill(0);
   for (int i = 0; i<6; i++) {
     textSize(10);
-    text(lis[i], 25+i*50, 25);
+    text(lis[i], 25+i*100, 25);
   } 
   String[] lis2 = {titrand.getName(), titrant.getName(), titrand.getName(), ""+titrand.getpH(), ""+titrand.getConcentration(), ""+titrand.getVolume()};
   for (int i = 0; i<6; i++) {
     textSize(10);
-    text(lis2[i], 25+i*50, 50);
+    text(lis2[i], 25+i*100, 50);
   } 
 }
