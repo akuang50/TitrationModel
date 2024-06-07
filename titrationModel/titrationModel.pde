@@ -24,7 +24,9 @@ void setup(){
 
 void mouseClicked() {
   if (mode==0) {mode++;}
-  if (mode==1) {if(mouseX>0&&mouseX<75&&mouseY>0&&mouseY<75) {mode++;}}
+  if (mode==1) {if(mouseX>0&&mouseX<75&&mouseY>0&&mouseY<75) {mode++;
+setup2();}}
+  print(mode);
   /*if (newSetup){
     setup2();
     newSetup = false;
@@ -61,6 +63,37 @@ void setup2(){
 }
 
 void draw(){
+  if (mode==2) {
+    if (setup2) {
+    background(255);
+    titrant.chooseTitrant();
+    tabled();}
+    if (origBeaker != null) {
+      titrand.atEquivalence();
+      image(origBeaker, 240, 565, width/4, height/4);
+    }
+  
+      if (buret != null) {
+        image(buret, 100, 100);
+      }
+  
+      if (titrant != null) {
+        if (keyPressed && key == ENTER) {
+          startDropping = true;
+        }
+        if (startDropping) {
+          if (dropY < 650) {
+            dropY += 5;
+            titrant.drip(dropY); 
+            titrand.checkEquivalence(titrant);
+          } else {
+            titrand.addTitrantVolume(5);
+            startDropping = false;
+            dropY = 595;  // Reset drop position for next time
+          }
+        }
+      }
+}
   switch(mode) {
     case 0: 
     
@@ -71,45 +104,10 @@ void draw(){
       
       break;
     case 2:
-      setup2();
+      
       break;
-     
-  }
-  if(setup2){
-    background(255);
-    titrant.chooseTitrant();
-    tabled();
   }
   
-  if (origBeaker != null) {
-    titrand.atEquivalence();
-    image(origBeaker, 240, 565, width/4, height/4);
-  }
-  
-  if (buret != null) {
-    image(buret, 100, 100);
-    
-
-  }
-  
-  if (titrant != null) {
-    
-    if (keyPressed && key == ENTER) {
-      startDropping = true;
-    }
-
-    if (startDropping) {
-      if (dropY < 650) {
-        dropY += 5;
-        titrant.drip(dropY); 
-        titrand.checkEquivalence(titrant);
-      } else {
-        titrand.addTitrantVolume(5);
-        startDropping = false;
-        dropY = 595;  // Reset drop position for next time
-      }
-    }
-  }
   //titrant.calcpH();
 }
 void tabled() {
@@ -119,7 +117,7 @@ void tabled() {
     textSize(10);
     text(lis[i], 25+i*50, 25);
   } 
-  String[] lis2 = {titrand.getName(), titrant.getName(), titrand.getName(), ""+titrand.getpH(), ""+titrand.getConcentration(), ""+titrand.getVolume()};
+  String[] lis2 = {titrand.getName(), titrant.getName(), indicator.getName(), ""+titrand.getpH(), ""+titrand.getConcentration(), ""+titrand.getVolume()};
   for (int i = 0; i<6; i++) {
     textSize(10);
     text(lis2[i], 25+i*50, 50);
