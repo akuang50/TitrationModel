@@ -91,13 +91,13 @@ void draw(){
   //titrant.calcpH();
 }
 void tabled() {
-  String[] lis = {"titrand", "titrant", "indicator", "pH", "concentration", "volume(ml)"};
+  String[] lis = {"titrand", "titrant", "indicator", "pH", "concentration(titrand)", "volume(ml)"};
   fill(0);
   for (int i = 0; i<6; i++) {
     textSize(10);
     text(lis[i], 25+i*100, 25);
   } 
-  String[] lis2 = {titrand.getName(), titrant.getName(), titrand.getName(), ""+titrand.getpH(), ""+titrand.getConcentration(), ""+titrand.getVolume()};
+  String[] lis2 = {titrand.getName(), titrant.getName(), titrand.getName(), ""+titrand.getpH(), ""+titrand.getMolarity(), ""+titrand.getVolume()};
   for (int i = 0; i<6; i++) {
     textSize(10);
     text(lis2[i], 25+i*100, 50);

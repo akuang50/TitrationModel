@@ -1,13 +1,13 @@
 class Titrand extends Solution{
   boolean isEquivalent;
   
-  public Titrand(boolean isStrong, boolean isAcid, String name, float pH, float concentration, float volume){
-    super( isStrong, isAcid, name, pH, concentration,volume);
+  public Titrand(boolean isStrong, boolean isAcid, String name, float pH, float moles, float volume){
+    super( isStrong, isAcid, name, pH, moles,volume);
   }
   
   public boolean isEquivalent(Titrant titrant) {
       if (this.isStrong && titrant.isStrong) {
-        if (calcMoles() == titrant.calcMoles()) {
+        if (this.getMolarity() == titrant.getMolarity()) {
           isEquivalent =  (this.isAcid && !titrant.isAcid) || (!this.isAcid && titrant.isAcid);
           return isEquivalent;
           // checks if one is acid and one is base
