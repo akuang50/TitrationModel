@@ -2,76 +2,99 @@ PImage origBeaker, buret;
 boolean newSetup, setup2, startDropping;
 Titrant titrant;
 Titrand titrand;
+Indicator indicator;
 float dropY;
 Table table;
+boolean isP = true;
+String indicatorName = "phenolphthalein";
+int buttonX = 700;
+int buttonY = 300;
+int buttonWidth = 100;
+int buttonHeight = 50;
 
-void setup(){
+void setup() {
   size(1000, 800);
-  background(152,190,100);
+  background(152, 190, 100);
   newSetup = true;
   dropY = 595;
   startDropping = false;
-  rect(375, 350, 220, 100, 28);
-  
   textSize(75);
   fill(0);
-  text("START", 380, 415); 
+  text("START", 383, 422);
 }
 
 void mouseClicked() {
-  if (newSetup){
+  if (newSetup) {
     setup2();
     newSetup = false;
   }
 }
 
-void setup2(){
+void setup2() {
   background(255);
   setup2 = true;
-  titrant = new Titrant(true, true, "Titrant", 1.0, 1.0,100.0); // change this later
-  titrand = new Titrand(true, false, "Titrand", 10.0, 1.0,0);
+  titrant = new Titrant(true, true, "HCl", 1.0, 1.0, 100.0); // change this later
+  titrand = new Titrand(true, false, "NaOH", 10.0, 1.0, 0);
+  indicator = new Indicator(true, false, indicatorName, 8.2, 1, 1);
   origBeaker = loadImage("original.png");
   buret = loadImage("buret.png");
-  
-  table = new Table();
-  table.addColumn("titrand");
-  table.addColumn("titrant");
-  table.addColumn("indicator");
-  table.addColumn("pH");
-  TableRow newRow = table.addRow();
-  newRow.setString("titrand", "change");
-  newRow.setString("titrant","later");
-  newRow.setString("indicator", "yeah");
-  newRow.setFloat("pH", 7.0);
-  saveTable(table, "table.csv");
-  
+}
+//-----------------------------------------------------------------------------------------------------
+//CHANGE THE INDICATOR
+//-----------------------------------------------------------------------------------------------------
 
-  //newRow.setFloat("pH", titrant.getpH());
-
-  
-  
+void updateIndicator() {
+  if (isP) {
+    indicatorName = "phenolphthalein";
+  } else {
+    indicatorName = "bromothymol blue";
+  }
+  indicator.setName(indicatorName); // Update indicator name
 }
 
-void draw(){
-  if(setup2){
-    background(255);
-    titrant.chooseTitrant();
-    tabled();
+boolean isMouseOver(int x, int y, int w, int h) {
+  return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
+}
+
+void mousePressed() {
+  if (isMouseOver(buttonX, buttonY, buttonWidth, buttonHeight)) {
+    isP = !isP;
+    updateIndicator(); // Update the indicator when the button is pressed
   }
-  
+}
+
+//-----------------------------------------------------------------------------------------------------
+//INTERFACE
+//-----------------------------------------------------------------------------------------------------
+
+void draw() {
+  if (setup2) {
+    background(255);
+    tabled();
+    // Draw button box
+    stroke(0); // Black border
+    if (isP) {
+      fill(255,192,203); 
+    } else {
+      fill(173,216,230); 
+    }
+    rect(buttonX, buttonY, buttonWidth, buttonHeight);
+    fill(0);
+    textSize(12);
+    text("Change Indicator", buttonX + 9, buttonY + 30); 
+
+  }
+
   if (origBeaker != null) {
     titrand.atEquivalence();
     image(origBeaker, 240, 565, width/4, height/4);
   }
-  
+
   if (buret != null) {
     image(buret, 100, 100);
-    
-
   }
-  
+
   if (titrant != null) {
-    
     if (keyPressed && key == ENTER) {
       startDropping = true;
     }
@@ -79,7 +102,7 @@ void draw(){
     if (startDropping) {
       if (dropY < 650) {
         dropY += 5;
-        titrant.drip(dropY); 
+        titrant.drip(dropY);
         titrand.checkEquivalence(titrant);
       } else {
         titrand.addTitrantVolume(5);
@@ -88,18 +111,21 @@ void draw(){
       }
     }
   }
-  //titrant.calcpH();
 }
+//-----------------------------------------------------------------------------------------------------
+//CHANGE THE TABLE DYNAMICALLY
+//-----------------------------------------------------------------------------------------------------
+
 void tabled() {
   String[] lis = {"titrand", "titrant", "indicator", "pH", "concentration(titrand)", "volume(ml)"};
   fill(0);
   for (int i = 0; i<6; i++) {
-    textSize(10);
-    text(lis[i], 25+i*100, 25);
+    textSize(15);
+    text(lis[i], 25+i*150, 25);
   } 
-  String[] lis2 = {titrand.getName(), titrant.getName(), titrand.getName(), ""+titrand.getpH(), ""+titrand.getMolarity(), ""+titrand.getVolume()};
+  String[] lis2 = {titrand.getName(), titrant.getName(), indicator.getName(), ""+titrand.getpH(), ""+titrand.getMolarity(), ""+titrand.getVolume()};
   for (int i = 0; i<6; i++) {
-    textSize(10);
-    text(lis2[i], 25+i*100, 50);
+    textSize(15);
+    text(lis2[i], 25+i*150, 50);
   } 
 }

@@ -5,7 +5,6 @@ class Solution{
   boolean isStrong, isAcid;
   
   public Solution(boolean isStrong, boolean isAcid,String name, float pH, float moles, float volume) {
-    
     this.name=name;
     this.pH=pH;
     this.moles=moles;

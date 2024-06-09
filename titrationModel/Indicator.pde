@@ -4,6 +4,10 @@ class Indicator extends Solution{
     
   }
   
+  public void setName(String name) {
+    this.name = name;
+  }
+  
   public boolean equivalence(){
     return false;
   }

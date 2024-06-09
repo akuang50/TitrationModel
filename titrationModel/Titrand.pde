@@ -26,13 +26,16 @@ class Titrand extends Solution{
   
   void atEquivalence(){
     if(isEquivalent){
-      fill(255,182,193);
+      if(indicator.getName().equals("phenolphthalein")){
+        fill(255,182,193);
+      }
+      else{
+        fill(173,216,230);
+      }
     }
     else {
       fill(255);
     }
-    
-    
     noStroke();
     rect(315, 640, 103, 100, 12, 12, 48, 72);
   }
