@@ -5,8 +5,8 @@ Titrand titrand;
 Indicator indicator;
 float dropY;
 Table table;
-int addVolume = 5;
-int dropSpeed = 5;
+int addVolume;
+int dropSpeed;
 //button to change indicator
 boolean isP = true;
 String indicatorName = "phenolphthalein";
@@ -51,6 +51,8 @@ void mouseClicked() {
 void setup2() {
   background(255);
   setup2 = true;
+  addVolume = 5;
+  dropSpeed = 5;
   titrant = new Titrant(true, true, "HCl", 1.0, 1.0, 100.0); // change this later
   titrand = new Titrand(true, false, "NaOH", 12.0, 1.0, 0);
   indicator = new Indicator(true, false, indicatorName, 8.2, 1, 1);
@@ -92,7 +94,10 @@ void mousePressed() {
     dropSpeed++;
   }
   if (isMouseOver(buttonX, buttonY+340, buttonWidth, buttonHeight)) {
-    addVolume--;
+    if(addVolume > 0){
+      addVolume--;
+    }
+    
   }
   if (isMouseOver(buttonX + 80, buttonY+340, buttonWidth, buttonHeight)) {
     addVolume++;
@@ -103,11 +108,11 @@ void mousePressed() {
 //BUTTONS
 //-----------------------------------------------------------------------------------------------------
 void resetSimulation(){
-fill(255);
+    fill(255);
     rect(buttonX, buttonY-100, buttonWidth, buttonHeight);
     fill(0);
     textSize(12);
-    text("Reset Simulation", buttonX + 7, buttonY - 70); 
+    text("Reset Simulation", buttonX + 7, buttonY - 70);
 }
 
 void changeIndicator(){
