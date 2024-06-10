@@ -12,9 +12,10 @@ int buttonX = 700;
 int buttonY = 300;
 int buttonWidth = 100;
 int buttonHeight = 50;
+//reset button
 boolean reset = false;
-int x;
-int y;
+//for the progress bar
+int x,y;
 int xdir, ydir;
 
 void setup() {
@@ -27,23 +28,20 @@ void setup() {
   fill(0);
   text("START", 383, 422);
   x = 0;
-  y=0;
-   xdir = 1;
-   ydir=1;
-  //ball animation
+  y = 0;
+  xdir = 1;
+  ydir=1;
   
 }
 
 void avatar(int x, int y){
-  //ellipse(x,y,50,10);
   rect(x,y-10,10,50);
-  //ellipse(x,y-20,50,10);
 }
 
 void mouseClicked() {
   if (newSetup) {
-  setup2();
-  newSetup = false;
+    setup2();
+    newSetup = false;
   }
 }
 
@@ -62,9 +60,9 @@ void setup2() {
 
 void updateIndicator() {
   if (isP) {
-  indicatorName = "phenolphthalein";
+    indicatorName = "phenolphthalein";
   } else {
-  indicatorName = "bromothymol blue";
+    indicatorName = "bromothymol blue";
   }
   indicator.setName(indicatorName); // Update indicator name
 }
@@ -75,8 +73,8 @@ boolean isMouseOver(int x, int y, int w, int h) {
 
 void mousePressed() {
   if (isMouseOver(buttonX, buttonY, buttonWidth, buttonHeight)) {
-  isP = !isP;
-  updateIndicator(); // Update the indicator when the button is pressed
+    isP = !isP;
+    updateIndicator(); // Update the indicator when the button is pressed
   }
   
   if (isMouseOver(buttonX, buttonY-100, buttonWidth, buttonHeight)) {
@@ -88,8 +86,17 @@ void mousePressed() {
 //-----------------------------------------------------------------------------------------------------
 //INTERFACE
 //-----------------------------------------------------------------------------------------------------
-
 void draw() {
+   if(!setup2) {
+     avatar(x,y);
+     x+=xdir;
+   if(x>1000) {
+      setup2();
+      newSetup=false;
+      setup2=true;
+    }
+   }
+  
   if (setup2) {
     background(255);
     tabled();
@@ -105,60 +112,35 @@ void draw() {
       fill(255,192,203); 
     } else {
       fill(173,216,230); 
-
-  if(!setup2) {
-  avatar(x,y);
-  x+=xdir;
-    if(x>1000) {
-      setup2();
-      newSetup=false;
-      setup2=true;
     }
-
-    }
-  if (setup2) {
-  background(255);
-  tabled();
-  // Draw button box
-  stroke(0); // Black border
-  if (isP) {
-    fill(255,192,203);
-  } else {
-    fill(173,216,230);
+    rect(buttonX, buttonY, buttonWidth, buttonHeight);
+    fill(0);
+    textSize(12);
+    text("Change Indicator", buttonX + 9, buttonY + 30); 
   }
-  rect(buttonX, buttonY, buttonWidth, buttonHeight);
-  fill(0);
-  textSize(12);
-  text("Change Indicator", buttonX + 9, buttonY + 30);
-
-  }
-
   if (origBeaker != null) {
-  titrand.atEquivalence();
-  image(origBeaker, 240, 565, width/4, height/4);
+    titrand.atEquivalence();
+    image(origBeaker, 240, 565, width/4, height/4);
   }
-
   if (buret != null) {
-  image(buret, 100, 100);
+    image(buret, 100, 100);
   }
-
   if (titrant != null) {
-  if (keyPressed && key == ENTER) {
-    startDropping = true;
-  }
-
-  if (startDropping) {
-    if (dropY < 650) {
-      dropY += 5;
-      titrant.drip(dropY);
-      titrand.isEquivalent(titrant);
-    } else {
-      titrand.addTitrantVolume(5);
-      titrand.calcpH();
-      startDropping = false;
-      dropY = 595;  // Reset drop position for next time
+    if (keyPressed && key == ENTER) {
+      startDropping = true;
     }
-  }
+    if (startDropping) {
+      if (dropY < 650) {
+        dropY += 5;
+        titrant.drip(dropY);
+        titrand.isEquivalent(titrant);
+      } else {
+        titrand.addTitrantVolume(5);
+        titrand.calcpH();
+        startDropping = false;
+        dropY = 595;  // Reset drop position for next time
+      }
+    }
   }
 }
 //-----------------------------------------------------------------------------------------------------
