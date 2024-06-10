@@ -8,21 +8,33 @@ class Titrand extends Solution{
   public boolean isEquivalent(Titrant titrant) {
       if (this.isStrong && titrant.isStrong) {
         if (this.getMolarity() == titrant.getMolarity()) {
-          isEquivalent =  (this.isAcid && !titrant.isAcid) || (!this.isAcid && titrant.isAcid);
+          //isEquivalent =  (this.isAcid && !titrant.isAcid) || (!this.isAcid && titrant.isAcid);
+          isEquivalent = true;
           return isEquivalent;
           // checks if one is acid and one is base
       }
     }
+     isEquivalent = false;
      return false;
-  }
-  
-  void checkEquivalence(Titrant titrant) {
-    isEquivalent(titrant);
   }
   
   void addTitrantVolume(float volume) {
     this.volume += volume;
   }
+  
+  void calcpH(){
+    if(this.getMolarity()>0.01){
+      this.pH = 14 + log(this.getMolarity());
+    }
+    else if(this.getMolarity() == 0.01){
+      this.pH = 7;
+    }
+    else{
+      this.pH = 7+log(this.getMolarity());
+     }
+       
+    }
+   
   
   void atEquivalence(){
     if(isEquivalent){
@@ -34,10 +46,19 @@ class Titrand extends Solution{
       }
     }
     else {
+      if(this.pH <7 && indicator.getName().equals("phenolphthalein")){
+        fill(231,84,128);
+      }
+      else if(this.pH <7 && indicator.getName().equals("bromothymol blue")){
+        fill(0,0,139);
+      }
+      else{
       fill(255);
+    }
     }
     noStroke();
     rect(315, 640, 103, 100, 12, 12, 48, 72);
+  
   }
 
 }

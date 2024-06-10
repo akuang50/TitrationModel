@@ -34,7 +34,7 @@ void setup2() {
   background(255);
   setup2 = true;
   titrant = new Titrant(true, true, "HCl", 1.0, 1.0, 100.0); // change this later
-  titrand = new Titrand(true, false, "NaOH", 10.0, 1.0, 0);
+  titrand = new Titrand(true, false, "NaOH", 12.0, 1.0, 0);
   indicator = new Indicator(true, false, indicatorName, 8.2, 1, 1);
   origBeaker = loadImage("original.png");
   buret = loadImage("buret.png");
@@ -103,9 +103,10 @@ void draw() {
       if (dropY < 650) {
         dropY += 5;
         titrant.drip(dropY);
-        titrand.checkEquivalence(titrant);
+        titrand.isEquivalent(titrant);
       } else {
         titrand.addTitrantVolume(5);
+        titrand.calcpH();
         startDropping = false;
         dropY = 595;  // Reset drop position for next time
       }

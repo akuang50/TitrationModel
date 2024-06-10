@@ -22,7 +22,7 @@ class Solution{
   }
   
   public float getpH(){
-   pH = -log(getMolarity());
+   //pH = -log(getMolarity());
    return pH;
   }
  
