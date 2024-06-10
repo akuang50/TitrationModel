@@ -7,10 +7,12 @@ float dropY;
 Table table;
 boolean isP = true;
 String indicatorName = "phenolphthalein";
+//button to change indicator
 int buttonX = 700;
 int buttonY = 300;
 int buttonWidth = 100;
 int buttonHeight = 50;
+boolean reset = false;
 int x;
 int y;
 int xdir, ydir;
@@ -76,6 +78,11 @@ void mousePressed() {
   isP = !isP;
   updateIndicator(); // Update the indicator when the button is pressed
   }
+  
+  if (isMouseOver(buttonX, buttonY-100, buttonWidth, buttonHeight)) {
+    reset = !reset;
+    setup2();
+  }
 }
 
 //-----------------------------------------------------------------------------------------------------
@@ -83,6 +90,22 @@ void mousePressed() {
 //-----------------------------------------------------------------------------------------------------
 
 void draw() {
+  if (setup2) {
+    background(255);
+    tabled();
+    stroke(0); 
+    //RESET BUTTON
+    fill(255);
+    rect(buttonX, buttonY-100, buttonWidth, buttonHeight);
+    fill(0);
+    textSize(12);
+    text("Reset Simulation", buttonX + 7, buttonY - 70); 
+    // CHANGE INDICATOR
+    if (isP) {
+      fill(255,192,203); 
+    } else {
+      fill(173,216,230); 
+
   if(!setup2) {
   avatar(x,y);
   x+=xdir;
@@ -91,6 +114,7 @@ void draw() {
       newSetup=false;
       setup2=true;
     }
+
     }
   if (setup2) {
   background(255);
