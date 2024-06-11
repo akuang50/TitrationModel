@@ -20,6 +20,7 @@ boolean reset = false;
 //for the progress bar
 int x,y;
 int xdir, ydir;
+boolean isOne;
 
 
 void setup() {
@@ -74,15 +75,15 @@ void updateIndicator() {
 }
 
 void updateAcidBase() {
-  if (isP) {
+  if (isOne) {
     acidName = "HCL";
     baseName = "NaOH";
   } else {
     acidName = "Acetic Acid";
     baseName = "Ammonia";
   }
-  titrand = new Titrand(true, true, acidName, 3.0, 3, 20); // Update titrand name
-  titrant = new Titrant(true, false, baseName, 11.0, 3, 20); // Update titrnat name
+  titrand = new Titrand(true, true, acidName, 7.0, 3, 20); // Update titrand name
+  titrant = new Titrant(true, false, baseName, 7.0, 3, 20); // Update titrnat name
 }
 
 boolean isMouseOver(int x, int y, int w, int h) {
@@ -114,6 +115,10 @@ void mousePressed() {
   }
   if (isMouseOver(buttonX + 80, buttonY+340, buttonWidth, buttonHeight)) {
     addVolume++;
+  }
+  if (isMouseOver(buttonX, buttonY-200, buttonWidth, buttonHeight)) {
+    isOne=!isOne;
+    updateAcidBase();
   }
 }
 
