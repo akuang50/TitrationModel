@@ -170,7 +170,7 @@ void changeAcidBase(){
   rect(buttonX, buttonY-200, buttonWidth, buttonHeight);
   fill(0);
   textSize(12);
-  text("Reset Simulation", buttonX + 7, buttonY - 70);
+  text("Change Acid/Base", buttonX + 7, buttonY - 170);
 
 }
 
@@ -196,6 +196,7 @@ void draw() {
     changeIndicator();
     changeSpeed();
     changeVolume();
+    changeAcidBase();
   }
   //DISPLAY IMAGE OF BURET AND BEAKER -----------------------
   if (origBeaker != null) {
