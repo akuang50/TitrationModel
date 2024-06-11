@@ -88,7 +88,9 @@ void mousePressed() {
   }
   
   if (isMouseOver(buttonX, buttonY+250, buttonWidth, buttonHeight)) {
-    dropSpeed--;
+    if(dropSpeed > 0){
+      dropSpeed--;
+    }
   }
   if (isMouseOver(buttonX + 80, buttonY+250, buttonWidth, buttonHeight)) {
     dropSpeed++;
@@ -102,6 +104,7 @@ void mousePressed() {
   if (isMouseOver(buttonX + 80, buttonY+340, buttonWidth, buttonHeight)) {
     addVolume++;
   }
+  
 }
 
 //-----------------------------------------------------------------------------------------------------
