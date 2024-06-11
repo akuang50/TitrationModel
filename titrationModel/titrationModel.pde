@@ -10,6 +10,7 @@ int dropSpeed;
 //button to change indicator
 boolean isP = true;
 String indicatorName = "phenolphthalein";
+String acidName, baseName;
 int buttonX = 700;
 int buttonY = 300;
 int buttonWidth = 100;
@@ -70,6 +71,18 @@ void updateIndicator() {
     indicatorName = "bromothymol blue";
   }
   indicator.setName(indicatorName); // Update indicator name
+}
+
+void updateAcidBase() {
+  if (isP) {
+    acidName = "HCL";
+    baseName = "NaOH";
+  } else {
+    acidName = "Acetic Acid";
+    baseName = "Ammonia";
+  }
+  titrand = new Titrand(true, true, acidName, 3.0, 3, 20); // Update titrand name
+  titrant = new Titrant(true, false, baseName, 11.0, 3, 20); // Update titrnat name
 }
 
 boolean isMouseOver(int x, int y, int w, int h) {
@@ -149,6 +162,15 @@ void changeVolume(){
   textSize(30);
   text("+", buttonX + 98, buttonY + 373); 
   text("-", buttonX + 20 , buttonY + 373);
+
+}
+
+void changeAcidBase(){
+  fill(255);
+  rect(buttonX, buttonY-200, buttonWidth, buttonHeight);
+  fill(0);
+  textSize(12);
+  text("Reset Simulation", buttonX + 7, buttonY - 70);
 
 }
 

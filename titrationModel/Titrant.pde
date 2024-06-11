@@ -9,5 +9,7 @@ class Titrant extends Solution{
     noStroke();
     ellipse(365, dropY, 20, 20);
   }
-
+  public void setName(String name) {
+    this.name = name;
+  }
 }

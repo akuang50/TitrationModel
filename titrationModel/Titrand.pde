@@ -60,5 +60,7 @@ class Titrand extends Solution{
     rect(315, 640, 103, 100, 12, 12, 48, 72);
   
   }
-
+  public void setName(String name) {
+    this.name = name;
+  }
 }
