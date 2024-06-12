@@ -6,14 +6,15 @@ class Titrand extends Solution{
   }
   
   public boolean isEquivalent(Titrant titrant) {
+    //checks for when the solution is at equivalence for strong acid-base
       if (this.isStrong && titrant.isStrong) {
         if (this.pH>=6.9 && this.pH<7.5) {
-          //isEquivalent =  (this.isAcid && !titrant.isAcid) || (!this.isAcid && titrant.isAcid);
           isEquivalent = true;
           return isEquivalent;
           // checks if one is acid and one is base
       }
     }
+    //checks for equivalence for weak acid-base
     else if (!this.isStrong && !titrant.isStrong){
       if (this.pH>=5.5 && this.pH<6) {
          isEquivalent = true;
@@ -28,24 +29,17 @@ class Titrand extends Solution{
   }
   
   void calcpH(){
-    //if(this.getMolarity()>0.01){
     if (this.isStrong && titrant.isStrong) {
       this.pH += 0.05*log(this.getMolarity());}
     else {
       this.pH += 0.01*log(this.getMolarity());
     }
-    /*}
-    else if(this.getMolarity() == 0.01){
-      this.pH = 7;
-    }
-    else{
-      this.pH = 7+log(this.getMolarity());
-     }*/
-       
+    
     }
    
   
   void atEquivalence(){
+    //changes color of solution
     if(isEquivalent){
       if(indicator.getName().equals("phenolphthalein")){
         fill(255,182,193);

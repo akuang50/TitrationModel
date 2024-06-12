@@ -27,11 +27,13 @@ void setup() {
   size(1000, 800);
   background(152, 190, 100);
   newSetup = true;
+  //helps animate the drip
   dropY = 595;
   startDropping = false;
   textSize(75);
   fill(0);
   text("START", 383, 422);
+  //initiates global variables
   x = 0;
   y = 0;
   xdir = 1;
@@ -40,10 +42,13 @@ void setup() {
 }
 
 void avatar(int x, int y){
-  rect(x,y-10,10,50);
+  //bar on the start screen
+  fill(255);
+  rect(x,y-10,5,30);
 }
 
 void mouseClicked() {
+  //brings you to the next screen
   if (newSetup) {
     setup2();
     newSetup = false;
@@ -51,6 +56,7 @@ void mouseClicked() {
 }
 
 void setup2() {
+  //initiates beaker variables
   background(255);
   setup2 = true;
   addVolume = 5;
@@ -66,6 +72,7 @@ void setup2() {
 //-----------------------------------------------------------------------------------------------------
 
 void updateIndicator() {
+  //switches between values
   if (isP) {
     indicatorName = "phenolphthalein";
   } else {
@@ -74,30 +81,13 @@ void updateIndicator() {
   indicator.setName(indicatorName); // Update indicator name
 }
 
-void updateAcidBase() {
-  int pH1;
-  boolean state;
-  if (isOne) {
-    acidName = "HI";
-    baseName = "LiOH";
-    pH1 = 9;
-    state = true;
-    
-  } else {
-    acidName = "Acetic Acid";
-    baseName = "Ammonia";
-    pH1 = 11;
-    state = false;
-  }
-  titrand = new Titrand(state, true, acidName, pH1, 3, 20); // Update titrand name
-  titrant = new Titrant(state, false, baseName, pH1, 3, 20); // Update titrnat name
-}
 
 boolean isMouseOver(int x, int y, int w, int h) {
   return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
 }
 
 void mousePressed() {
+  //makes buttons work
   if (isMouseOver(buttonX, buttonY, buttonWidth, buttonHeight)) {
     isP = !isP;
     updateIndicator(); // Update the indicator when the button is pressed
@@ -109,9 +99,14 @@ void mousePressed() {
   }
   
   if (isMouseOver(buttonX, buttonY+250, buttonWidth, buttonHeight)) {
+<<<<<<< HEAD
+    if (dropSpeed>0) {
+      dropSpeed--;}
+=======
     if(dropSpeed > 0){
       dropSpeed--;
     }
+>>>>>>> cc2a52e31cbbf4cad8e5c3f33952d1b4bb5f476d
   }
   if (isMouseOver(buttonX + 80, buttonY+250, buttonWidth, buttonHeight)) {
     dropSpeed++;
@@ -131,6 +126,27 @@ void mousePressed() {
     updateAcidBase();
   }
 }
+
+void updateAcidBase() {
+  //switches between base-acid combos
+  int pH1;
+  boolean state;
+  if (isOne) {
+    acidName = "HI";
+    baseName = "LiOH";
+    pH1 = 9;
+    state = true;
+    
+  } else {
+    acidName = "Acetic Acid";
+    baseName = "Ammonia";
+    pH1 = 11;
+    state = false;
+  }
+  titrand = new Titrand(state, true, acidName, pH1, 3, 20); // Update titrand name
+  titrant = new Titrant(state, false, baseName, pH1, 3, 20); // Update titrnat name
+}
+
 
 //-----------------------------------------------------------------------------------------------------
 //BUTTONS
@@ -193,6 +209,7 @@ void changeAcidBase(){
 //INTERFACE
 //-----------------------------------------------------------------------------------------------------
 void draw() {
+  //makes bar move
    if(!setup2) {
      avatar(x,y);
      x+=xdir;
@@ -202,7 +219,7 @@ void draw() {
       setup2=true;
     }
    }
-  
+  //calls the other methods for the buttons and table
   if (setup2) {
     background(255);
     tabled();
