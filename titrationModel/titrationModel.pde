@@ -99,8 +99,14 @@ void mousePressed() {
   }
   
   if (isMouseOver(buttonX, buttonY+250, buttonWidth, buttonHeight)) {
+<<<<<<< HEAD
     if (dropSpeed>0) {
       dropSpeed--;}
+=======
+    if(dropSpeed > 0){
+      dropSpeed--;
+    }
+>>>>>>> cc2a52e31cbbf4cad8e5c3f33952d1b4bb5f476d
   }
   if (isMouseOver(buttonX + 80, buttonY+250, buttonWidth, buttonHeight)) {
     dropSpeed++;
@@ -114,6 +120,7 @@ void mousePressed() {
   if (isMouseOver(buttonX + 80, buttonY+340, buttonWidth, buttonHeight)) {
     addVolume++;
   }
+  
   if (isMouseOver(buttonX, buttonY-200, buttonWidth, buttonHeight)) {
     isOne=!isOne;
     updateAcidBase();
