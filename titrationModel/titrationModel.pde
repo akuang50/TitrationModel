@@ -75,15 +75,22 @@ void updateIndicator() {
 }
 
 void updateAcidBase() {
+  int pH1;
+  boolean state;
   if (isOne) {
-    acidName = "HCL";
-    baseName = "NaOH";
+    acidName = "HI";
+    baseName = "LiOH";
+    pH1 = 9;
+    state = true;
+    
   } else {
     acidName = "Acetic Acid";
     baseName = "Ammonia";
+    pH1 = 11;
+    state = false;
   }
-  titrand = new Titrand(true, true, acidName, 7.0, 3, 20); // Update titrand name
-  titrant = new Titrant(true, false, baseName, 7.0, 3, 20); // Update titrnat name
+  titrand = new Titrand(state, true, acidName, pH1, 3, 20); // Update titrand name
+  titrant = new Titrant(state, false, baseName, pH1, 3, 20); // Update titrnat name
 }
 
 boolean isMouseOver(int x, int y, int w, int h) {
