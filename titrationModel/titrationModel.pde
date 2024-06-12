@@ -74,6 +74,44 @@ void updateIndicator() {
   indicator.setName(indicatorName); // Update indicator name
 }
 
+
+boolean isMouseOver(int x, int y, int w, int h) {
+  return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
+}
+
+void mousePressed() {
+  if (isMouseOver(buttonX, buttonY, buttonWidth, buttonHeight)) {
+    isP = !isP;
+    updateIndicator(); // Update the indicator when the button is pressed
+  }
+  
+  if (isMouseOver(buttonX, buttonY-100, buttonWidth, buttonHeight)) {
+    reset = !reset;
+    setup2();
+  }
+  
+  if (isMouseOver(buttonX, buttonY+250, buttonWidth, buttonHeight)) {
+    if (dropSpeed>0) {
+      dropSpeed--;}
+  }
+  if (isMouseOver(buttonX + 80, buttonY+250, buttonWidth, buttonHeight)) {
+    dropSpeed++;
+  }
+  if (isMouseOver(buttonX, buttonY+340, buttonWidth, buttonHeight)) {
+    if(addVolume > 0){
+      addVolume--;
+    }
+    
+  }
+  if (isMouseOver(buttonX + 80, buttonY+340, buttonWidth, buttonHeight)) {
+    addVolume++;
+  }
+  if (isMouseOver(buttonX, buttonY-200, buttonWidth, buttonHeight)) {
+    isOne=!isOne;
+    updateAcidBase();
+  }
+}
+
 void updateAcidBase() {
   int pH1;
   boolean state;
@@ -93,41 +131,6 @@ void updateAcidBase() {
   titrant = new Titrant(state, false, baseName, pH1, 3, 20); // Update titrnat name
 }
 
-boolean isMouseOver(int x, int y, int w, int h) {
-  return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
-}
-
-void mousePressed() {
-  if (isMouseOver(buttonX, buttonY, buttonWidth, buttonHeight)) {
-    isP = !isP;
-    updateIndicator(); // Update the indicator when the button is pressed
-  }
-  
-  if (isMouseOver(buttonX, buttonY-100, buttonWidth, buttonHeight)) {
-    reset = !reset;
-    setup2();
-  }
-  
-  if (isMouseOver(buttonX, buttonY+250, buttonWidth, buttonHeight)) {
-    dropSpeed--;
-  }
-  if (isMouseOver(buttonX + 80, buttonY+250, buttonWidth, buttonHeight)) {
-    dropSpeed++;
-  }
-  if (isMouseOver(buttonX, buttonY+340, buttonWidth, buttonHeight)) {
-    if(addVolume > 0){
-      addVolume--;
-    }
-    
-  }
-  if (isMouseOver(buttonX + 80, buttonY+340, buttonWidth, buttonHeight)) {
-    addVolume++;
-  }
-  if (isMouseOver(buttonX, buttonY-200, buttonWidth, buttonHeight)) {
-    isOne=!isOne;
-    updateAcidBase();
-  }
-}
 
 //-----------------------------------------------------------------------------------------------------
 //BUTTONS
