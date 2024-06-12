@@ -10,6 +10,7 @@ int dropSpeed;
 //button to change indicator
 boolean isP = true;
 String indicatorName = "phenolphthalein";
+String acidName, baseName;
 int buttonX = 700;
 int buttonY = 300;
 int buttonWidth = 100;
@@ -19,6 +20,7 @@ boolean reset = false;
 //for the progress bar
 int x,y;
 int xdir, ydir;
+boolean isOne;
 
 
 void setup() {
@@ -72,6 +74,25 @@ void updateIndicator() {
   indicator.setName(indicatorName); // Update indicator name
 }
 
+void updateAcidBase() {
+  int pH1;
+  boolean state;
+  if (isOne) {
+    acidName = "HI";
+    baseName = "LiOH";
+    pH1 = 9;
+    state = true;
+    
+  } else {
+    acidName = "Acetic Acid";
+    baseName = "Ammonia";
+    pH1 = 11;
+    state = false;
+  }
+  titrand = new Titrand(state, true, acidName, pH1, 3, 20); // Update titrand name
+  titrant = new Titrant(state, false, baseName, pH1, 3, 20); // Update titrnat name
+}
+
 boolean isMouseOver(int x, int y, int w, int h) {
   return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
 }
@@ -105,6 +126,10 @@ void mousePressed() {
     addVolume++;
   }
   
+  if (isMouseOver(buttonX, buttonY-200, buttonWidth, buttonHeight)) {
+    isOne=!isOne;
+    updateAcidBase();
+  }
 }
 
 //-----------------------------------------------------------------------------------------------------
@@ -155,6 +180,15 @@ void changeVolume(){
 
 }
 
+void changeAcidBase(){
+  fill(255);
+  rect(buttonX, buttonY-200, buttonWidth, buttonHeight);
+  fill(0);
+  textSize(12);
+  text("Change Acid/Base", buttonX + 7, buttonY - 170);
+
+}
+
 //-----------------------------------------------------------------------------------------------------
 //INTERFACE
 //-----------------------------------------------------------------------------------------------------
@@ -177,6 +211,7 @@ void draw() {
     changeIndicator();
     changeSpeed();
     changeVolume();
+    changeAcidBase();
   }
   //DISPLAY IMAGE OF BURET AND BEAKER -----------------------
   if (origBeaker != null) {
